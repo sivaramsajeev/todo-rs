@@ -33,9 +33,11 @@ impl Todo {
         f.read_to_string(&mut content)?;
         let map: HashMap<String, bool> = content
             .lines()
-            .map(|line| line.splitn(2, '\t').collect::<Vec<&str>>())
+            .map(|line| line.splitn(2, '\t')
+            .collect::<Vec<&str>>())
             .map(|v| (v[0], v[1]))
-            .map(|(k, v)| (String::from(k), bool::from_str(v).unwrap()))
+            .map(|(k, v)| (String::from(k), bool::from_str(v)
+            .unwrap()))
             .collect();
         Ok(Todo { map })
     }
